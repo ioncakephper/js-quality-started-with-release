@@ -42,7 +42,7 @@ npm test
 
 Tired of repetitive setup, inconsistent code, and integration headaches? See how `js-quality-started-with-release` provides a superior foundation compared to starting from scratch or using basic boilerplates.
 
-| Criteria                           | Minimal/Empty Repository | Basic Boilerplate                | `js-quality-started-with-release` Template                                |
+| Criteria                           | Minimal/Empty Repository | Basic Boilerplate                | `js-quality-started-with-release` Template                   |
 | :--------------------------------- | :----------------------- | :------------------------------- | :----------------------------------------------------------- |
 | **Core Purpose**                   | Blank slate              | Quick start, basic structure     | Quality, consistency, efficiency                             |
 | **Linting (e.g., ESLint)**         | ❌ No                    | ⚙️ Manual setup required / Basic | ✅ Pre-configured, opinionated                               |
@@ -133,8 +133,8 @@ This template is built around a fully automated, commit-driven workflow.
 
 This project uses `Husky`, `lint-staged`, and `commitlint` to enforce code quality and consistent commit messages.
 
-1.  **On Staging:** When you stage files (`git add`), `lint-staged` runs formatters (`Prettier`) and linters (`ESLint`, `markdownlint`) on them. This ensures your code and documentation are clean _before_ you even write a commit message.
-2.  **On Commit:** When you write a commit message (`git commit`), `commitlint` validates it against the **Conventional Commits** specification. This is the most critical step, as these structured commit messages power the automated release process. If your message is not compliant (e.g., `git commit -m "updated stuff"`), the commit will be aborted.
+1. **On Staging:** When you stage files (`git add`), `lint-staged` runs formatters (`Prettier`) and linters (`ESLint`, `markdownlint`) on them. This ensures your code and documentation are clean _before_ you even write a commit message.
+2. **On Commit:** When you write a commit message (`git commit`), `commitlint` validates it against the **Conventional Commits** specification. This is the most critical step, as these structured commit messages power the automated release process. If your message is not compliant (e.g., `git commit -m "updated stuff"`), the commit will be aborted.
 
 ### Automated Release Generation
 
@@ -142,18 +142,18 @@ This template uses **`semantic-release`** to automate the entire release process
 
 The process is triggered every time a commit is merged into the `main` branch. Here’s what happens:
 
-1.  **Trigger:** A push or merge to the `main` branch starts the `release.yml` GitHub Actions workflow.
-2.  **Analysis:** `semantic-release` analyzes the commit messages since the last release.
-3.  **Versioning:** It automatically determines the next version number based on the types of commits:
-    *   `fix:` commits result in a **PATCH** release (e.g., `1.0.0` -> `1.0.1`).
-    *   `feat:` commits result in a **MINOR** release (e.g., `1.0.1` -> `1.1.0`).
-    *   Commits with `BREAKING CHANGE:` in the body result in a **MAJOR** release (e.g., `1.1.0` -> `2.0.0`).
-4.  **Release Generation:** If a release is warranted, `semantic-release` performs the following actions:
-    *   Updates `CHANGELOG.md` with the new release notes.
-    *   Updates the `version` in `package.json`.
-    *   Creates a new Git tag for the new version.
-    *   Creates a new GitHub Release with the generated notes.
-    *   Commits the updated `package.json` and `CHANGELOG.md` files back to the `main` branch.
+1. **Trigger:** A push or merge to the `main` branch starts the `release.yml` GitHub Actions workflow.
+2. **Analysis:** `semantic-release` analyzes the commit messages since the last release.
+3. **Versioning:** It automatically determines the next version number based on the types of commits:
+   - `fix:` commits result in a **PATCH** release (e.g., `1.0.0` -> `1.0.1`).
+   - `feat:` commits result in a **MINOR** release (e.g., `1.0.1` -> `1.1.0`).
+   - Commits with `BREAKING CHANGE:` in the body result in a **MAJOR** release (e.g., `1.1.0` -> `2.0.0`).
+4. **Release Generation:** If a release is warranted, `semantic-release` performs the following actions:
+   - Updates `CHANGELOG.md` with the new release notes.
+   - Updates the `version` in `package.json`.
+   - Creates a new Git tag for the new version.
+   - Creates a new GitHub Release with the generated notes.
+   - Commits the updated `package.json` and `CHANGELOG.md` files back to the `main` branch.
 
 This means you no longer need to manually tag versions. Your release cycle is tied directly to the features and fixes you merge into your main branch.
 
