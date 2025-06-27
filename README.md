@@ -110,6 +110,7 @@ After creating your repository from this template, be sure to:
 3. **Update `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md`**: Replace the `[YOUR_PROJECT_CONTACT_EMAIL]` placeholder with a valid project contact email.
 4. **Update `README.md` badges**: Replace `your-username/your-new-repo` in the badge URLs with your actual GitHub username and repository name.
 5. **Configure Publishing (Optional)**: In `.releaserc.js`, change `npmPublish: false` to `npmPublish: true` if you want to publish to the npm registry. You will also need to add an `NPM_TOKEN` secret to your repository.
+6. **Write Great Release Notes**: After `semantic-release` creates a new release, edit it on GitHub to add a high-level summary of the changes.
 
 ## Available Scripts
 

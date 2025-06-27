@@ -116,12 +116,23 @@ Please ensure all existing tests pass before submitting a pull request. If you a
 
 ## Commit Messages
 
-We encourage the use of Conventional Commits for clear and consistent commit history. Examples:
+This project uses **Conventional Commits**, which is the foundation for our automated release process. Your commit messages are automatically parsed to determine the next version number and generate changelog notes.
 
-- `feat: Add new feature for X`
-- `fix: Resolve bug in Y component`
-- `docs: Update README with Z section`
-- `chore: Update dependencies`
+Please follow this specification. The `commitlint` hook will prevent non-compliant messages.
+
+### How Commit Types Affect Releases
+
+- **`feat:`**: A commit of this type indicates a new feature has been added. This will trigger a **minor** version bump (e.g., `1.2.3` -> `1.3.0`).
+- **`fix:`**: A commit of this type indicates a bug fix. This will trigger a **patch** version bump (e.g., `1.2.3` -> `1.2.4`).
+- **`BREAKING CHANGE:`**: A commit that has `BREAKING CHANGE:` in its body or footer indicates a major, incompatible change. This will trigger a **major** version bump (e.g., `1.2.3` -> `2.0.0`).
+- **Other types** (`docs:`, `chore:`, `refactor:`, `style:`, `test:`): These commits will be included in the release notes but **will not** trigger a release on their own.
+
+**Example of a breaking change commit:**
+```
+feat: remove deprecated `getUser` method
+
+BREAKING CHANGE: The `getUser` method has been removed. Please use `fetchUser` instead.
+```
 
 ## License
 
