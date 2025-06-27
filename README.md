@@ -1,18 +1,19 @@
 # js-quality-starter-with-release
 
-[![CI](https://github.com/your-username/your-new-repo/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/your-new-repo/actions/workflows/ci.yml)
+[![Release](https://github.com/your-username/your-new-repo/actions/workflows/release.yml/badge.svg)](https://github.com/your-username/your-new-repo/actions/workflows/release.yml)
+[![semantic-release](https://img.shields.io/badge/semantic--release-e10079?logo=semantic-release&logoColor=white)](https://github.com/semantic-release/semantic-release)
 [![codecov](https://codecov.io/gh/your-username/your-new-repo/graph/badge.svg?token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/your-username/your-new-repo)
 [![Code style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A template repository for modern JavaScript projects with pre-configured linting, formatting, testing, and CI/CD using GitHub Actions.
+A template repository for modern JavaScript projects with pre-configured linting, formatting, testing, and a fully automated release pipeline using `semantic-release`.
 
 This template provides a solid foundation for any new JavaScript project, ensuring code quality and consistency from the start.
 
 ## Table of Contents <!-- omit in toc -->
 
 - [Quick Start](#quick-start)
-- [Why Choose `js-quality-started`?](#why-choose-js-quality-started)
+- [Why Choose `js-quality-started-with-release`?](#why-choose-js-quality-started-with-release)
 - [What's Inside?](#whats-inside)
 - [Getting Started](#getting-started)
   - [Using as a Template](#using-as-a-template)
@@ -20,8 +21,8 @@ This template provides a solid foundation for any new JavaScript project, ensuri
   - [Post-Template Setup](#post-template-setup)
 - [Available Scripts](#available-scripts)
 - [How It Works](#how-it-works)
-  - [Pre-commit Hooks](#pre-commit-hooks)
-  - [CI/CD Pipelines](#cicd-pipelines)
+  - [Pre-commit and Commit Message Hooks](#pre-commit-and-commit-message-hooks)
+  - [Automated Release Generation](#automated-release-generation)
 - [Customization](#customization)
 - [Code Coverage](#code-coverage)
 - [Contributing](#contributing)
@@ -30,18 +31,18 @@ This template provides a solid foundation for any new JavaScript project, ensuri
 ## Quick Start
 
 ```bash
-npx degit your-github-username/js-quality-started my-new-project
+npx degit your-github-username/js-quality-starter-with-release my-new-project --force
 cd my-new-project
 npm install
 npm test
 # Start building!
 ```
 
-## Why Choose `js-quality-started`?
+## Why Choose `js-quality-started-with-release`?
 
-Tired of repetitive setup, inconsistent code, and integration headaches? See how `js-quality-started` provides a superior foundation compared to starting from scratch or using basic boilerplates.
+Tired of repetitive setup, inconsistent code, and integration headaches? See how `js-quality-started-with-release` provides a superior foundation compared to starting from scratch or using basic boilerplates.
 
-| Criteria                           | Minimal/Empty Repository | Basic Boilerplate                | `js-quality-started` Template                                |
+| Criteria                           | Minimal/Empty Repository | Basic Boilerplate                | `js-quality-started-with-release` Template                   |
 | :--------------------------------- | :----------------------- | :------------------------------- | :----------------------------------------------------------- |
 | **Core Purpose**                   | Blank slate              | Quick start, basic structure     | Quality, consistency, efficiency                             |
 | **Linting (e.g., ESLint)**         | ❌ No                    | ⚙️ Manual setup required / Basic | ✅ Pre-configured, opinionated                               |
@@ -107,6 +108,8 @@ After creating your repository from this template, be sure to:
 1. **Update `package.json`**: Change the `name`, `description`, and `author` fields.
 2. **Update `LICENSE`**: Modify the `[year]` and `[fullname]` to reflect your project's ownership.
 3. **Update `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md`**: Replace the `[YOUR_PROJECT_CONTACT_EMAIL]` placeholder with a valid project contact email.
+4. **Update `README.md` badges**: Replace `your-username/your-new-repo` in the badge URLs with your actual GitHub username and repository name.
+5. **Configure Publishing (Optional)**: In `.releaserc.js`, change `npmPublish: false` to `npmPublish: true` if you want to publish to the npm registry. You will also need to add an `NPM_TOKEN` secret to your repository.
 
 ## Available Scripts
 
@@ -124,27 +127,35 @@ In the project directory, you can run:
 
 ## How It Works
 
-### Pre-commit Hooks
+This template is built around a fully automated, commit-driven workflow.
 
-This project uses `Husky` and `lint-staged` to run `eslint --fix`, `prettier --write` (for both code and Markdown), and `markdownlint --fix` on staged files every time you make a commit. This automated quality gate ensures that no code or documentation that violates the style guide ever gets into the codebase.
+### Pre-commit and Commit Message Hooks
 
-If a file has linting or formatting errors, the tools will attempt to fix them automatically. If they can, the fixed code is what gets committed. If they can't, the commit is aborted so you can fix the issues manually.
+This project uses `Husky`, `lint-staged`, and `commitlint` to enforce code quality and consistent commit messages.
 
-### CI/CD Pipelines
+1. **On Staging:** When you stage files (`git add`), `lint-staged` runs formatters (`Prettier`) and linters (`ESLint`, `markdownlint`) on them. This ensures your code and documentation are clean _before_ you even write a commit message.
+2. **On Commit:** When you write a commit message (`git commit`), `commitlint` validates it against the **Conventional Commits** specification. This is the most critical step, as these structured commit messages power the automated release process. If your message is not compliant (e.g., `git commit -m "updated stuff"`), the commit will be aborted.
 
-This template includes one GitHub Action workflow located in the `.github/workflows` directory:
+### Automated Release Generation
 
-- **`ci.yml`**: This workflow runs on every push and pull request to the `main` branch. It acts as a final validation gate, ensuring that all tests, linting, and formatting checks pass before code is merged.
+This template uses **`semantic-release`** to automate the entire release process. The manual step of deciding on a version number and creating a release is completely removed.
 
-The workflow performs the following steps across multiple Node.js versions (18.x, 20.x):
+The process is triggered every time a commit is merged into the `main` branch. Here’s what happens:
 
-1. **Install dependencies** using `npm ci` for fast, reliable installs.
-2. **Lint code** with `npm run lint`.
-3. **Lint Markdown files** with `npm run lint:md`.
-4. **Check code formatting** with `npm run format`.
-5. **Check Markdown formatting** with `npm run format:md`.
-6. **Audit for vulnerabilities** with `npm audit --production`.
-7. **Run tests** with `npm test`.
+1. **Trigger:** A push or merge to the `main` branch starts the `release.yml` GitHub Actions workflow.
+2. **Analysis:** `semantic-release` analyzes the commit messages since the last release.
+3. **Versioning:** It automatically determines the next version number based on the types of commits:
+   - `fix:` commits result in a **PATCH** release (e.g., `1.0.0` -> `1.0.1`).
+   - `feat:` commits result in a **MINOR** release (e.g., `1.0.1` -> `1.1.0`).
+   - Commits with `BREAKING CHANGE:` in the body result in a **MAJOR** release (e.g., `1.1.0` -> `2.0.0`).
+4. **Release Generation:** If a release is warranted, `semantic-release` performs the following actions:
+   - Updates `CHANGELOG.md` with the new release notes.
+   - Updates the `version` in `package.json`.
+   - Creates a new Git tag for the new version.
+   - Creates a new GitHub Release with the generated notes.
+   - Commits the updated `package.json` and `CHANGELOG.md` files back to the `main` branch.
+
+This means you no longer need to manually tag versions. Your release cycle is tied directly to the features and fixes you merge into your main branch.
 
 ## Customization
 
@@ -154,7 +165,7 @@ This template is a starting point. You can easily customize it to fit your proje
 - **Formatting Options**: Adjust the `.prettierrc` file to change Prettier's formatting options.
 - **Markdown Linting**: Customize `markdownlint` rules by editing the `.markdownlint.json` file.
 - **Testing**: The `jest.config.js` file can be configured for more advanced testing scenarios.
-- **CI/CD**: Edit the workflow files in `.github/workflows` to add new steps, such as deployment or notifications.
+- **Release Configuration**: Edit the `.releaserc.js` file to customize the `semantic-release` plugins and behavior.
 
 ## Code Coverage
 
