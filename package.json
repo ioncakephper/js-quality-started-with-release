@@ -1,5 +1,5 @@
 {
-  "name": "js-quality-starter",
+  "name": "js-quality-starter-with-release",
   "version": "1.0.0",
   "description": "A template repository for modern JavaScript projects with pre-configured linting, formatting, testing, and CI/CD using GitHub Actions.",
   "main": "src/index.js",
@@ -15,6 +15,11 @@
     "lint:md:fix": "markdownlint --ignore-path .gitignore --fix .",
     "audit:ci": "npm audit --production",
     "prepare": "husky install"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "keywords": [
     "javascript",
