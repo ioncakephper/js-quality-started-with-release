@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ioncakephper/js-quality-started-with-release/compare/v1.0.0...v1.0.1) (2025-06-27)
+
+
+### Bug Fixes
+
+* enhance contributing guidelines and README with commit message standards ([765033a](https://github.com/ioncakephper/js-quality-started-with-release/commit/765033a16d01fc09c197e87756f86cdbdbe9d7a7))
+
 # 1.0.0 (2025-06-27)
 
 
