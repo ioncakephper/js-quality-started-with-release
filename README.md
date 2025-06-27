@@ -31,7 +31,7 @@ This template provides a solid foundation for any new JavaScript project, ensuri
 ## Quick Start
 
 ```bash
-npx degit your-github-username/js-quality-started-with-release --force
+npx degit your-github-username/js-quality-starter-with-release my-new-project --force
 cd my-new-project
 npm install
 npm test
