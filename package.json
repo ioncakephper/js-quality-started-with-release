@@ -14,7 +14,8 @@
     "lint:md": "markdownlint --ignore-path .gitignore .",
     "lint:md:fix": "markdownlint --ignore-path .gitignore --fix .",
     "audit:ci": "npm audit --production",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "npx semantic-release"
   },
   "keywords": [
     "javascript",
