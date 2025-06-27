@@ -16,11 +16,6 @@
     "audit:ci": "npm audit --production",
     "prepare": "husky install"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "keywords": [
     "javascript",
     "template",
@@ -36,6 +31,8 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.2.0",
