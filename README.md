@@ -1,4 +1,4 @@
-# js-quality-starter
+# js-quality-starter-with-release
 
 [![CI](https://github.com/your-username/your-new-repo/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/your-new-repo/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/your-username/your-new-repo/graph/badge.svg?token=YOUR_CODECOV_TOKEN)](https://codecov.io/gh/your-username/your-new-repo)
